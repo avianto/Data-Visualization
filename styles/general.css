@@ -1,0 +1,7 @@
+﻿/* Data Visualization Style Sheet */
+
+#canvas {
+	width: 600px;
+	margin: 20px auto;
+	border: 1px solid #eee;
+}
