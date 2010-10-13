@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 	<head>
@@ -28,9 +28,11 @@
 		
 			var paper = Raphael('canvas', 600, 400);
 			
-			var l = paper.path('M 300 50 L 300 200');
+			// create line
+                        var l = paper.path('M 300 50 L 300 200');
 			
-			var c = paper.circle(300, 210, 10);
+			// create circle
+                        var c = paper.circle(300, 210, 10);
 			
 			c.attr({fill: '#333', stroke: '#00f', opacity: 0.5});
 			
