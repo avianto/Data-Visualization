@@ -29,22 +29,19 @@
 			var paper = Raphael('canvas', 600, 400);
 			
 			// create line
-                        var l = paper.path('M 300 50 L 300 200');
+			var l = paper.path('M 300 50 L 300 200');
 			
 			// create circle
-                        var c = paper.circle(300, 210, 10);
-			
+            var c = paper.circle(300, 210, 10);
 			c.attr({fill: '#333', stroke: '#00f', opacity: 0.5});
 			
 			c.node.onclick = function(event) {
-			
 				c.animate({cy:350, r:50}, 2000, 'bounce');
 				l.animate({path: 'M 300 50 L 300 300'}, 2000, 'bounce');
-			
 			};
 			
+			// create rectangle			
 			var r = paper.rect(275, 10, 50, 25);
-			
 			r.attr({fill: '#0ff'});
 			
 			r.node.onclick = function(event) {
