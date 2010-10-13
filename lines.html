@@ -1,0 +1,50 @@
+﻿<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8"/>
+		<title>Lines Experiments</title>
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" media="all" href="styles/reset.css"/>
+		<link rel="stylesheet" media="all" href="styles/general.css"/>
+		<script src="scripts/raphael-min.js"></script>
+		
+	</head>
+
+	<body>
+	
+		<section>
+	
+		<div id="canvas"></div>
+		
+		</section>
+		
+		
+		<script type="text/javascript">
+		
+		window.onload = function() {
+		
+			var paper = Raphael('canvas', 600, 400);
+			
+			var l = paper.path('M 300 50 L 300 200');
+			
+			var c = paper.circle(300, 210, 10);
+			
+			c.attr({fill: '#333', stroke: '#00f', opacity: 0.5});
+			
+			c.node.onclick = function(event) {
+			
+				c.animate({cy:350, r:50}, 2000, 'bounce');
+				l.animate({path: 'M 300 50 L 300 300'}, 2000, 'bounce');
+			
+			};
+			
+		}
+		
+		</script>
+		
+	</body>
+	
+</html>
