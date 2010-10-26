@@ -1,0 +1,77 @@
+﻿<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8"/>
+		<title>Circles &amp; Boxes Experiments</title>
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" media="all" href="styles/reset.css"/>
+		<link rel="stylesheet" media="all" href="styles/general.css"/>
+		<script src="scripts/raphael-min.js"></script>
+		
+	</head>
+
+	<body>
+	
+		<section>
+	
+		<div id="canvas"></div>
+		
+		</section>
+		
+		
+		<script type="text/javascript">
+		
+		window.onload = function() {
+		
+			var paper = Raphael('canvas', 600, 400);	
+			
+			var circlesarray = paper.set();
+			
+			circlesarray.push(
+				paper.circle(300, 30, 5),
+				paper.circle(300, 60, 10),
+				paper.circle(300, 90, 15)
+			);
+			
+			circlesarray.attr({stroke: "#333", fill: "90-#fff-#000"});
+			
+			var rectangle = paper.rect(275, 175, 50, 50);
+			rectangle.attr('fill', '#333');
+
+            paper.safari();
+			
+			rectangle.node.onmouseover = function(event) {
+			
+				rectangle.attr({fill: '#333'});
+			
+				rectangle.animate({rotation: 360, 'stroke-width': 1}, 2000, 'bounce', function() {
+					/* callback after original animation finishes */
+					this.animate({
+						rotation: -360,
+						fill: '#f00'
+					}, 1000);
+				});
+			
+			};
+			
+			var singlecircle = paper.circle(300, 200, 100).attr({stroke: '#ccc'}),
+				 ball = paper.circle(300, 100, 5).attr({fill: '#f00'}).click(function() { 
+					rectangle.attr('fill', 'blue');
+			});
+			
+			
+		}
+		
+		
+
+        
+
+		
+		</script>
+		
+	</body>
+	
+</html>
