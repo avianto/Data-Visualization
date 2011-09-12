@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8"/>
+		<title>Charting</title>
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" media="all" href="styles/reset.css"/>
+		<link rel="stylesheet" media="all" href="styles/general.css"/>
+		<script src="scripts/raphael-min.js"></script>
+		<script src="scripts/g.raphael-min.js"></script>
+		<script src="scripts/g.pie-min.js"></script>
+		<script src="scripts/g.line-min.js"></script>
+		<script src="scripts/g.dot-min.js"></script>
+		<script src="scripts/g.bar-min.js"></script>
+		
+		
+	</head>
+
+	<body>
+	
+		<section>
+	
+		<div id="pie" class="canvas"></div>
+		
+		<div id="bar" class="canvas"></div>
+		
+		<div id="line" class="canvas"></div>
+		
+		</section>
+		
+		
+		<script type="text/javascript" charset="utf-8"> 
+            window.onload = function () {
+			
+				// Pie
+			
+                var p = Raphael("pie");
+                p.g.txtattr.font = "12px 'Fontin Sans', Fontin-Sans, sans-serif";
+                
+                p.g.text(320, 50, "Pie Chart").attr({"font-size": 20});
+                
+                var pie = p.g.piechart(320, 240, 100, [5600, 2000, 1000, 3000, 4300], 
+					{legend: ["%%.%%", "%%.%%", "%%.%%", "%%.%%", "%%.%%"], legendpos: "east", href: ["", ""]}
+				);
+                pie.hover(function () {
+                    this.sector.stop();
+                    this.sector.scale(1.1, 1.1, this.cx, this.cy);
+                    if (this.label) {
+                        this.label[0].stop();
+                        this.label[0].scale(1.5);
+                        this.label[1].attr({"font-weight": 800});
+                    }
+                }, function () {
+                    this.sector.animate({scale: [1, 1, this.cx, this.cy]}, 500, "bounce");
+                    if (this.label) {
+                        this.label[0].animate({scale: 1}, 500, "bounce");
+                        this.label[1].attr({"font-weight": 400});
+                    }
+					
+				});
+					
+				// Bar
+				
+				var b = Raphael("bar"),
+					data1 = [[55, 20, 13, 32, 5, 1, 2, 10], [10, 2, 1, 5, 32, 13, 20, 55], [12, 20, 30]],
+                    data2 = [[10, 20, 13, 32, 5, 1, 2, 10], [10, 2, 1, 5, 32, 13, 20, 30], [12, 20, 30]];		
+				
+				b.g.txtattr.font = "12px 'Fontin Sans', Fontin-Sans, sans-serif";
+                
+                b.g.text(320, 50, "Bar Chart").attr({"font-size": 20});	
+				
+				b.g.barchart(20, 40, 620, 200, data1);
+				
+				b.g.barchart(20, 100, 620, 340, data2);
+				
+				
+				// Line
+				
+				var l = Raphael("line");
+				
+				var x = [], y = [], y2 = [], y3 = [];
+                for (var i = 0; i < 1e6; i++) {
+                    x[i] = i * 10;
+                    y[i] = (y[i - 1] || 0) + (Math.random() * 7) - 3;
+                    y2[i] = (y2[i - 1] || 150) + (Math.random() * 7) - 3.5;
+                    y3[i] = (y3[i - 1] || 300) + (Math.random() * 7) - 4;
+                }
+				
+				var lines = l.g.linechart(20, 50, 620, 320, [[1, 2, 3, 4, 5, 6, 7],[3.5, 4.5, 5.5, 6.5, 7, 8]], [[12, 32, 23, 15, 17, 27, 22], [10, 20, 30, 25, 15, 28]], {nostroke: false, axis: "0 0 1 1", symbol: "o", smooth: true}).hoverColumn(function () {
+                    this.tags = l.set();
+                    for (var i = 0, ii = this.y.length; i < ii; i++) {
+                        this.tags.push(l.g.tag(this.x, this.y[i], this.values[i], 160, 10).insertBefore(this).attr([{fill: "#fff"}, {fill: this.symbols[i].attr("fill")}]));
+                    }
+                }, function () {
+                    this.tags && this.tags.remove();
+                });
+                lines.symbols.attr({r: 3});				
+                
+            };
+        </script>
+		
+	</body>
+	
+</html>
